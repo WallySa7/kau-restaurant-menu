@@ -1,0 +1,152 @@
+{
+  "app": {
+    "name": "KAU Restaurant",
+    "tagline": "Your campus meal, one tap away"
+  },
+  "nav": {
+    "home": "Home",
+    "menu": "Menu",
+    "tickets": "My Tickets",
+    "admin": "Admin",
+    "login": "Log In",
+    "register": "Sign Up",
+    "logout": "Log Out",
+    "language": "العربية"
+  },
+  "landing": {
+    "headline": "Skip the queue. Book your meal online.",
+    "subheadline": "Browse this week's menu, reserve your slot, and show your QR code at the counter.",
+    "ctaBrowse": "Browse Menu",
+    "ctaLogin": "Log In to Book"
+  },
+  "auth": {
+    "loginTitle": "Welcome back",
+    "registerTitle": "Create your account",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full name",
+    "confirmPassword": "Confirm password",
+    "loginButton": "Log In",
+    "registerButton": "Create Account",
+    "noAccount": "Don't have an account?",
+    "haveAccount": "Already have an account?",
+    "signUp": "Sign up",
+    "logIn": "Log in",
+    "passwordMismatch": "Passwords do not match",
+    "invalidCredentials": "Invalid email or password",
+    "registerSuccess": "Account created. You can now log in."
+  },
+  "menu": {
+    "title": "Weekly Menu",
+    "weekOf": "Week of {{date}}",
+    "noMenu": "No menu published for this week yet.",
+    "breakfast": "Breakfast",
+    "lunch": "Lunch",
+    "dinner": "Dinner",
+    "monday": "Monday",
+    "tuesday": "Tuesday",
+    "wednesday": "Wednesday",
+    "thursday": "Thursday",
+    "friday": "Friday",
+    "saturday": "Saturday",
+    "sunday": "Sunday",
+    "book": "Book",
+    "alreadyBooked": "Already booked",
+    "slotTaken": "Another option booked",
+    "soldOut": "Sold out",
+    "price": "{{value}} SAR"
+  },
+  "booking": {
+    "title": "Confirm your booking",
+    "summary": "Summary",
+    "meal": "Meal",
+    "date": "Date",
+    "total": "Total",
+    "paymentTitle": "Payment (simulated)",
+    "paymentNote": "This is a demo payment — no real charge will be made.",
+    "cardNumber": "Card number",
+    "expiry": "Expiry",
+    "cvc": "CVC",
+    "payAndBook": "Pay & Book",
+    "processing": "Processing…",
+    "success": "Booking confirmed!",
+    "duplicate": "You already have a ticket for this slot."
+  },
+  "tickets": {
+    "title": "My Tickets",
+    "empty": "You have no tickets yet.",
+    "browseMenu": "Browse the menu",
+    "status": "Status",
+    "confirmed": "Confirmed",
+    "redeemed": "Redeemed",
+    "cancelled": "Cancelled",
+    "viewQr": "View QR",
+    "cancel": "Cancel",
+    "qrTitle": "Show this at the counter",
+    "ticketCode": "Ticket code",
+    "print": "Print",
+    "copy": "Copy code",
+    "copied": "Code copied",
+    "cancelConfirm": "Cancel this booking?",
+    "cancelled": "Booking cancelled"
+  },
+  "admin": {
+    "dashboard": "Dashboard",
+    "menu": "Menu Manager",
+    "bookings": "Bookings",
+    "scan": "Scan Ticket",
+    "stats": {
+      "todayConfirmed": "Today's confirmed",
+      "todayRedeemed": "Today's redeemed",
+      "totalUsers": "Total users"
+    },
+    "menuManager": {
+      "selectWeek": "Select week",
+      "newWeek": "New week",
+      "weekStart": "Week start (Sunday)",
+      "addItem": "Add meal item",
+      "edit": "Edit",
+      "delete": "Delete",
+      "uploadPhoto": "Upload photo",
+      "saved": "Saved",
+      "deleteConfirm": "Delete this meal item?",
+      "fieldDay": "Day",
+      "fieldMealType": "Meal type",
+      "fieldTitleEn": "Title (English)",
+      "fieldTitleAr": "Title (Arabic)",
+      "fieldDescriptionEn": "Description (English)",
+      "fieldDescriptionAr": "Description (Arabic)",
+      "fieldPrice": "Price (SAR)",
+      "fieldCapacity": "Capacity",
+      "colDay": "Day",
+      "colMeal": "Meal",
+      "colTitle": "Title",
+      "colPrice": "Price",
+      "colActions": "Actions"
+    },
+    "scan": {
+      "title": "Scan ticket QR",
+      "instruction": "Point the camera at the student's QR code.",
+      "redeemed": "Redeemed successfully",
+      "alreadyRedeemed": "This ticket was already redeemed",
+      "invalid": "Invalid ticket",
+      "tryAgain": "Scan another"
+    },
+    "bookingsTable": {
+      "student": "Student",
+      "meal": "Meal",
+      "date": "Date",
+      "status": "Status",
+      "ticket": "Ticket",
+      "all": "All",
+      "empty": "No bookings"
+    }
+  },
+  "common": {
+    "loading": "Loading…",
+    "save": "Save",
+    "cancel": "Cancel",
+    "back": "Back",
+    "error": "Something went wrong"
+  }
+}

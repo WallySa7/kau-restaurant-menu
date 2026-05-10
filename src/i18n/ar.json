@@ -1,0 +1,152 @@
+{
+  "app": {
+    "name": "مطعم جامعة الملك عبدالعزيز",
+    "tagline": "وجبتك الجامعية على بُعد ضغطة زر"
+  },
+  "nav": {
+    "home": "الرئيسية",
+    "menu": "القائمة",
+    "tickets": "تذاكري",
+    "admin": "لوحة الإدارة",
+    "login": "تسجيل الدخول",
+    "register": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "language": "English"
+  },
+  "landing": {
+    "headline": "تجاوز الطابور، واحجز وجبتك إلكترونيًا",
+    "subheadline": "تصفح قائمة هذا الأسبوع، واحجز وجبتك، واعرض رمز QR عند الكاونتر.",
+    "ctaBrowse": "تصفح القائمة",
+    "ctaLogin": "سجّل الدخول للحجز"
+  },
+  "auth": {
+    "loginTitle": "مرحبًا بعودتك",
+    "registerTitle": "أنشئ حسابك",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "fullName": "الاسم الكامل",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "loginButton": "تسجيل الدخول",
+    "registerButton": "إنشاء الحساب",
+    "noAccount": "ليس لديك حساب؟",
+    "haveAccount": "لديك حساب بالفعل؟",
+    "signUp": "إنشاء حساب",
+    "logIn": "تسجيل الدخول",
+    "passwordMismatch": "كلمات المرور غير متطابقة",
+    "invalidCredentials": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "registerSuccess": "تم إنشاء الحساب. يمكنك الآن تسجيل الدخول."
+  },
+  "menu": {
+    "title": "قائمة الأسبوع",
+    "weekOf": "أسبوع {{date}}",
+    "noMenu": "لم تُنشر قائمة لهذا الأسبوع بعد.",
+    "breakfast": "الإفطار",
+    "lunch": "الغداء",
+    "dinner": "العشاء",
+    "monday": "الإثنين",
+    "tuesday": "الثلاثاء",
+    "wednesday": "الأربعاء",
+    "thursday": "الخميس",
+    "friday": "الجمعة",
+    "saturday": "السبت",
+    "sunday": "الأحد",
+    "book": "احجز",
+    "alreadyBooked": "محجوز مسبقًا",
+    "slotTaken": "حجزت خيارًا آخر",
+    "soldOut": "نفدت الكمية",
+    "price": "{{value}} ر.س"
+  },
+  "booking": {
+    "title": "تأكيد الحجز",
+    "summary": "ملخص",
+    "meal": "الوجبة",
+    "date": "التاريخ",
+    "total": "المجموع",
+    "paymentTitle": "الدفع (محاكاة)",
+    "paymentNote": "هذه عملية دفع تجريبية — لن يتم خصم أي مبلغ فعلي.",
+    "cardNumber": "رقم البطاقة",
+    "expiry": "تاريخ الانتهاء",
+    "cvc": "الرمز السري",
+    "payAndBook": "ادفع واحجز",
+    "processing": "جارٍ المعالجة…",
+    "success": "تم تأكيد الحجز!",
+    "duplicate": "لديك تذكرة بالفعل لهذه الوجبة."
+  },
+  "tickets": {
+    "title": "تذاكري",
+    "empty": "لا توجد تذاكر بعد.",
+    "browseMenu": "تصفح القائمة",
+    "status": "الحالة",
+    "confirmed": "مؤكدة",
+    "redeemed": "مستخدمة",
+    "cancelled": "ملغاة",
+    "viewQr": "عرض QR",
+    "cancel": "إلغاء",
+    "qrTitle": "اعرض هذا الرمز عند الكاونتر",
+    "ticketCode": "رمز التذكرة",
+    "print": "طباعة",
+    "copy": "نسخ الرمز",
+    "copied": "تم نسخ الرمز",
+    "cancelConfirm": "هل تريد إلغاء هذا الحجز؟",
+    "cancelled": "تم إلغاء الحجز"
+  },
+  "admin": {
+    "dashboard": "لوحة التحكم",
+    "menu": "إدارة القائمة",
+    "bookings": "الحجوزات",
+    "scanBtn": "مسح التذكرة",
+    "stats": {
+      "todayConfirmed": "حجوزات اليوم",
+      "todayRedeemed": "تذاكر مستخدمة اليوم",
+      "totalUsers": "إجمالي المستخدمين"
+    },
+    "menuManager": {
+      "selectWeek": "اختر الأسبوع",
+      "newWeek": "أسبوع جديد",
+      "weekStart": "بداية الأسبوع (الأحد)",
+      "addItem": "إضافة وجبة",
+      "edit": "تعديل",
+      "delete": "حذف",
+      "uploadPhoto": "رفع صورة",
+      "saved": "تم الحفظ",
+      "deleteConfirm": "هل تريد حذف هذه الوجبة؟",
+      "fieldDay": "اليوم",
+      "fieldMealType": "نوع الوجبة",
+      "fieldTitleEn": "العنوان (إنجليزي)",
+      "fieldTitleAr": "العنوان (عربي)",
+      "fieldDescriptionEn": "الوصف (إنجليزي)",
+      "fieldDescriptionAr": "الوصف (عربي)",
+      "fieldPrice": "السعر (ر.س)",
+      "fieldCapacity": "السعة",
+      "colDay": "اليوم",
+      "colMeal": "الوجبة",
+      "colTitle": "العنوان",
+      "colPrice": "السعر",
+      "colActions": "إجراءات"
+    },
+    "scan": {
+      "title": "مسح رمز التذكرة",
+      "instruction": "وجّه الكاميرا نحو رمز QR الخاص بالطالب.",
+      "redeemed": "تم استخدام التذكرة بنجاح",
+      "alreadyRedeemed": "هذه التذكرة مستخدمة من قبل",
+      "invalid": "تذكرة غير صالحة",
+      "tryAgain": "مسح أخرى"
+    },
+    "bookingsTable": {
+      "student": "الطالب",
+      "meal": "الوجبة",
+      "date": "التاريخ",
+      "status": "الحالة",
+      "ticket": "التذكرة",
+      "all": "الكل",
+      "empty": "لا توجد حجوزات"
+    }
+  },
+  "common": {
+    "loading": "جارٍ التحميل…",
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "back": "رجوع",
+    "error": "حدث خطأ ما"
+  }
+}
