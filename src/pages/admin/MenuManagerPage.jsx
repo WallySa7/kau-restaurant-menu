@@ -15,6 +15,7 @@ const EMPTY_FORM = {
   description_ar: '',
   price_sar: '0.00',
   capacity: 100,
+  calories_est: 0,
   photo_url: '',
 };
 
@@ -93,6 +94,7 @@ export default function MenuManagerPage() {
         day_of_week: Number(form.day_of_week),
         price_sar: Number(form.price_sar),
         capacity: Number(form.capacity),
+        calories_est: Number(form.calories_est),
       };
       if (editingId) {
         await supabase.from('menu_items').update(payload).eq('id', editingId).throwOnError();
@@ -121,6 +123,7 @@ export default function MenuManagerPage() {
       description_ar: item.description_ar ?? '',
       price_sar: String(item.price_sar),
       capacity: item.capacity,
+      calories_est: item.calories_est ?? 0,
       photo_url: item.photo_url ?? '',
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -247,6 +250,17 @@ export default function MenuManagerPage() {
               required
             />
           </div>
+          <div>
+            <label className="label">{t('admin.menuManager.fieldCalories')}</label>
+            <input
+              className="input"
+              type="number"
+              min="0"
+              value={form.calories_est}
+              onChange={(e) => setForm({ ...form, calories_est: e.target.value })}
+              required
+            />
+          </div>
           <div className="sm:col-span-2">
             <label className="label">{t('admin.menuManager.uploadPhoto')}</label>
             <input
@@ -302,6 +316,7 @@ export default function MenuManagerPage() {
               <th className="py-2 pe-3 text-start">{t('admin.menuManager.colDay')}</th>
               <th className="py-2 pe-3 text-start">{t('admin.menuManager.colMeal')}</th>
               <th className="py-2 pe-3 text-start">{t('admin.menuManager.colTitle')}</th>
+              <th className="py-2 pe-3 text-start">{t('admin.menuManager.colCalories')}</th>
               <th className="py-2 pe-3 text-start">{t('admin.menuManager.colPrice')}</th>
               <th className="py-2 text-end">
                 <span className="sr-only">{t('admin.menuManager.colActions')}</span>
@@ -311,7 +326,7 @@ export default function MenuManagerPage() {
           <tbody>
             {items.length === 0 && (
               <tr>
-                <td colSpan="5" className="py-6 text-center text-gray-400">
+                <td colSpan="6" className="py-6 text-center text-gray-400">
                   —
                 </td>
               </tr>
@@ -321,6 +336,7 @@ export default function MenuManagerPage() {
                 <td className="py-2 pe-3">{t(`menu.${DAY_KEYS[it.day_of_week]}`)}</td>
                 <td className="py-2 pe-3">{t(`menu.${it.meal_type}`)}</td>
                 <td className="py-2 pe-3">{it.title_en}</td>
+                <td className="py-2 pe-3">{it.calories_est ?? '—'}</td>
                 <td className="py-2 pe-3">{it.price_sar}</td>
                 <td className="py-2 text-end space-x-2 rtl:space-x-reverse">
                   <button onClick={() => handleEdit(it)} className="text-kau-700 hover:underline">

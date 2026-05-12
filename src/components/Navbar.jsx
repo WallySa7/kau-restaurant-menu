@@ -5,10 +5,11 @@ import { useAuth } from '../contexts/AuthContext.jsx';
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
-  const { isAuthenticated, isAdmin, signOut } = useAuth();
+  const { isAuthenticated, isAdmin, profile, signOut } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const [open, setOpen] = useState(false);
+  const firstName = profile?.full_name?.split(' ')[0] ?? '';
 
   // Close mobile menu on navigation.
   useEffect(() => {
@@ -72,7 +73,7 @@ export default function Navbar() {
           )}
         </nav>
 
-        <div className="flex items-center gap-1.5 shrink-0">
+        <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
           <button
             onClick={toggleLanguage}
             className="btn-secondary !px-2.5 !py-1.5 text-xs sm:text-sm shrink-0"
@@ -81,7 +82,12 @@ export default function Navbar() {
             {t('nav.language')}
           </button>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-2">
+            {isAuthenticated && firstName && (
+              <span className="text-sm text-gray-500 truncate max-w-[140px]">
+                {t('nav.welcome', { name: firstName })}
+              </span>
+            )}
             {isAuthenticated ? (
               <button onClick={handleLogout} className="btn-secondary !px-3 !py-1.5 text-sm">
                 {t('nav.logout')}
@@ -114,6 +120,11 @@ export default function Navbar() {
       {open && (
         <div className="md:hidden border-t border-gray-100 bg-white">
           <nav className="max-w-6xl mx-auto px-4 py-3 flex flex-col gap-1">
+            {isAuthenticated && firstName && (
+              <span className="px-3 py-2 text-sm text-gray-500 font-medium border-b border-gray-50 mb-1">
+                {t('nav.welcome', { name: firstName })}
+              </span>
+            )}
             <NavLink to="/menu" className={linkClass}>
               {t('nav.menu')}
             </NavLink>

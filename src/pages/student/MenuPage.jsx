@@ -5,6 +5,7 @@ import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { sundayOf, dateForDay, DAYS_OF_WEEK, MEAL_TYPES } from '../../lib/dates';
 import { CardSkeleton } from '../../components/Skeleton.jsx';
+import MealDetailModal from '../../components/MealDetailModal.jsx';
 
 const MENU_PDF_URL = '/menu-kau.pdf';
 
@@ -220,7 +221,7 @@ function BuyTicketsBanner({ isAuthenticated, t }) {
   );
 }
 
-function MealSection({ meal, slotItems, t, lang, sectionIndex }) {
+function MealSection({ meal, slotItems, t, lang, sectionIndex, onMealClick }) {
   const meta = MEAL_META[meal];
   if (slotItems.length === 0) return null;
 
@@ -247,8 +248,9 @@ function MealSection({ meal, slotItems, t, lang, sectionIndex }) {
           return (
             <article
               key={item.id}
-              className="stagger-item bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
+              className="stagger-item bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group cursor-pointer"
               style={{ animationDelay: `${(sectionIndex * 80) + (i * 60)}ms` }}
+              onClick={() => onMealClick(item)}
             >
               <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 shrink-0">
                 {item.photo_url ? (
@@ -267,23 +269,17 @@ function MealSection({ meal, slotItems, t, lang, sectionIndex }) {
                 )}
               </div>
 
-              <div className="flex flex-col flex-1 gap-1.5 p-4">
+              <div className="flex flex-col flex-1 gap-1.5 p-4 pb-4">
                 <h3 className="font-bold text-gray-900 leading-snug">{title}</h3>
                 {desc && (
                   <p className="text-sm text-gray-500 leading-relaxed line-clamp-2">{desc}</p>
                 )}
               </div>
-
-              <div className="flex items-center justify-between gap-2 px-4 pb-4 pt-2 border-t border-gray-100 mt-auto">
-                <span className="font-bold text-gray-900 tabular-nums text-sm">
-                  {t('menu.price', { value: item.price_sar })}
-                </span>
-                <span className="text-xs text-gray-400">{item.capacity} available</span>
-              </div>
             </article>
           );
         })}
       </div>
+
     </section>
   );
 }
@@ -297,6 +293,7 @@ export default function MenuPage() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeDay, setActiveDay] = useState(() => new Date().getDay());
+  const [selectedMeal, setSelectedMeal] = useState(null);
 
   const todayDow = new Date().getDay();
   const isCurrentWeek = weekStart === sundayOf();
@@ -398,6 +395,7 @@ export default function MenuPage() {
                 t={t}
                 lang={lang}
                 sectionIndex={sectionIndex}
+                onMealClick={setSelectedMeal}
               />
             ))}
           </div>
@@ -420,6 +418,12 @@ export default function MenuPage() {
           </a>
         </div>
       </div>
+
+      <MealDetailModal
+        item={selectedMeal}
+        lang={lang}
+        onClose={() => setSelectedMeal(null)}
+      />
     </div>
   );
 }

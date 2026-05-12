@@ -4,22 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 
 const SLIDES = [
-  {
-    src: 'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1400&q=80',
-    alt: 'Restaurant food spread',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1400&q=80',
-    alt: 'Restaurant interior',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1400&q=80',
-    alt: 'Plated meal',
-  },
-  {
-    src: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1400&q=80',
-    alt: 'Fresh food',
-  },
+  { src: '/hero_photo1.png', alt: 'KAU Restaurant hero 1' },
+  { src: '/hero_photo2.png', alt: 'KAU Restaurant hero 2' },
+  { src: '/hero_photo3.png', alt: 'KAU Restaurant hero 3' },
 ];
 
 const MAPS_EMBED =

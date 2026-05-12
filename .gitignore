@@ -30,6 +30,15 @@ dist-ssr
 # Dependencies
 node_modules
 
+# Database SQL scripts
+*.sql
+
+# Upload scripts
+scripts/
+
+# Meal photos
+public/images/
+
 # Claude / AI agent memory
 .claude
 .opencode

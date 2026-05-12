@@ -12,7 +12,8 @@
     "register": "إنشاء حساب",
     "logout": "تسجيل الخروج",
     "language": "English",
-    "buyTickets": "اشترِ التذاكر"
+    "buyTickets": "اشترِ التذاكر",
+    "welcome": "نورتنا, {{name}}"
   },
   "landing": {
     "headline": "تجاوز الطابور، واشترِ تذكرة وجبتك إلكترونيًا",
@@ -69,6 +70,7 @@
     "slotTaken": "حجزت خيارًا آخر",
     "soldOut": "نفدت الكمية",
     "price": "{{value}} ر.س",
+    "calories": "~{{value}} سعرة حرارية",
     "buyTickets": "اشترِ التذاكر",
     "buyTicketsSub": "تجاوز الطابور — اشترِ تذاكر الوجبات لأي وجبة."
   },
@@ -152,10 +154,12 @@
       "fieldDescriptionAr": "الوصف (عربي)",
       "fieldPrice": "السعر (ر.س)",
       "fieldCapacity": "السعة",
+      "fieldCalories": "السعرات الحرارية (تقريبي)",
       "colDay": "اليوم",
       "colMeal": "الوجبة",
       "colTitle": "العنوان",
       "colPrice": "السعر",
+      "colCalories": "السعرات",
       "colActions": "إجراءات"
     },
     "scan": {

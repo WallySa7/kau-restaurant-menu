@@ -12,7 +12,8 @@
     "register": "Sign Up",
     "logout": "Log Out",
     "language": "العربية",
-    "buyTickets": "Buy Tickets"
+    "buyTickets": "Buy Tickets",
+    "welcome": "Welcome, {{name}}"
   },
   "landing": {
     "headline": "Skip the queue. Buy your meal ticket online.",
@@ -69,6 +70,7 @@
     "slotTaken": "Another option booked",
     "soldOut": "Sold out",
     "price": "{{value}} SAR",
+    "calories": "~{{value}} kcal",
     "buyTickets": "Buy Tickets",
     "buyTicketsSub": "Skip the queue — purchase meal tickets for any meal type."
   },
@@ -152,10 +154,12 @@
       "fieldDescriptionAr": "Description (Arabic)",
       "fieldPrice": "Price (SAR)",
       "fieldCapacity": "Capacity",
+      "fieldCalories": "Calories (est.)",
       "colDay": "Day",
       "colMeal": "Meal",
       "colTitle": "Title",
       "colPrice": "Price",
+      "colCalories": "Calories",
       "colActions": "Actions"
     },
     "scan": {
