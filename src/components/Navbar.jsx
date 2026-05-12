@@ -26,10 +26,8 @@ export default function Navbar() {
   };
 
   const handleLogout = async () => {
-    const root = document.getElementById('root');
-    if (root) { root.style.transition = 'opacity 130ms ease-in'; root.style.opacity = '0'; }
     await signOut();
-    setTimeout(() => navigate('/'), 130);
+    navigate('/');
   };
 
   const linkClass = ({ isActive }) =>
