@@ -17,12 +17,19 @@ export default function Navbar() {
 
   const toggleLanguage = () => {
     const root = document.getElementById('root');
+    root.style.transition = 'opacity 130ms ease-in';
     root.style.opacity = '0';
     setTimeout(() => {
       const next = i18n.language.startsWith('ar') ? 'en' : 'ar';
       i18n.changeLanguage(next);
-      root.style.opacity = '1';
-    }, 150);
+      // double rAF: wait for dir/font reflow to fully paint before fade-in
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          root.style.transition = 'opacity 180ms ease-out';
+          root.style.opacity = '1';
+        });
+      });
+    }, 160);
   };
 
   const handleLogout = async () => {
@@ -37,10 +44,10 @@ export default function Navbar() {
 
   return (
     <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
-        <Link to="/" className="flex items-center gap-2 shrink-0">
-          <img src="/kau_logo.png" alt="KAU Logo" className="h-10 w-auto" />
-          <span className="font-semibold text-gray-900 hidden sm:inline">{t('app.name')}</span>
+      <div className="max-w-6xl mx-auto px-3 sm:px-4 h-14 sm:h-16 flex items-center justify-between gap-2">
+        <Link to="/" className="flex items-center gap-2 shrink-0 min-w-0">
+          <img src="/kau_logo.png" alt="KAU Logo" className="h-8 sm:h-10 w-auto shrink-0" />
+          <span className="font-semibold text-gray-900 hidden sm:inline truncate">{t('app.name')}</span>
         </Link>
 
         {/* Desktop nav */}
@@ -60,10 +67,10 @@ export default function Navbar() {
           )}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1.5 shrink-0">
           <button
             onClick={toggleLanguage}
-            className="btn-secondary !px-3 !py-1.5 text-sm"
+            className="btn-secondary !px-2.5 !py-1.5 text-xs sm:text-sm shrink-0"
             aria-label="Toggle language"
           >
             {t('nav.language')}
@@ -83,7 +90,7 @@ export default function Navbar() {
 
           <button
             type="button"
-            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md text-gray-700 hover:bg-gray-100"
+            className="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-md text-gray-700 hover:bg-gray-100 shrink-0"
             aria-expanded={open}
             aria-label="Toggle menu"
             onClick={() => setOpen((v) => !v)}
