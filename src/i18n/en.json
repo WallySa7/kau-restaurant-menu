@@ -17,7 +17,19 @@
     "headline": "Skip the queue. Book your meal online.",
     "subheadline": "Browse this week's menu, reserve your slot, and show your QR code at the counter.",
     "ctaBrowse": "Browse Menu",
-    "ctaLogin": "Log In to Book"
+    "ctaLogin": "Log In to Book",
+    "howItWorksTitle": "How It Works",
+    "howItWorksDesc": "Three simple steps to skip the queue and enjoy your campus meal.",
+    "step": "Step",
+    "step1Title": "Browse the Menu",
+    "step1Desc": "Explore this week's meals by day and meal type — breakfast, lunch, or dinner.",
+    "step2Title": "Book Your Slot",
+    "step2Desc": "Reserve your meal and complete a quick simulated payment in seconds.",
+    "step3Title": "Show Your QR Code",
+    "step3Desc": "Arrive at the counter, scan your ticket, and enjoy your meal — no queue.",
+    "locationTitle": "Find Us on Campus",
+    "locationDesc": "KAU Restaurant is located in the heart of King Abdulaziz University, Jeddah.",
+    "openInMaps": "Open in Google Maps"
   },
   "auth": {
     "loginTitle": "Welcome back",
@@ -50,6 +62,7 @@
     "friday": "Friday",
     "saturday": "Saturday",
     "sunday": "Sunday",
+    "downloadPdf": "Download PDF Menu",
     "book": "Book",
     "alreadyBooked": "Already booked",
     "slotTaken": "Another option booked",
@@ -141,6 +154,28 @@
       "all": "All",
       "empty": "No bookings"
     }
+  },
+  "footer": {
+    "tagline": "Your campus meal, one tap away",
+    "contactTitle": "Contact Us",
+    "contactEmail": "restaurant@kau.edu.sa",
+    "contactPhone": "+966 12 695 2000",
+    "contactHours": "Sun – Thu, 7 AM – 9 PM",
+    "locationTitle": "Where We Are",
+    "locationAddress": "King Abdulaziz University\nJeddah 21589, Saudi Arabia",
+    "locationMaps": "Open in Google Maps",
+    "linksTitle": "Quick Links",
+    "linkMenu": "Browse Menu",
+    "linkLogin": "Log In",
+    "linkRegister": "Sign Up",
+    "policiesTitle": "Policies & Legal",
+    "linkPrivacy": "Privacy Policy",
+    "linkRefund": "Refund Policy",
+    "linkTerms": "Terms of Use",
+    "kauWebsite": "KAU Official Website",
+    "fcitWebsite": "FCIT Official Website",
+    "madeBy": "Made with care by FCIT Students",
+    "rights": "© {{year}} KAU Restaurant. All rights reserved."
   },
   "common": {
     "loading": "Loading…",

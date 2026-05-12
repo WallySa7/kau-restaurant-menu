@@ -16,13 +16,20 @@ export default function Navbar() {
   }, [location.pathname]);
 
   const toggleLanguage = () => {
-    const next = i18n.language === 'ar' ? 'en' : 'ar';
-    i18n.changeLanguage(next);
+    const root = document.getElementById('root');
+    root.style.opacity = '0';
+    setTimeout(() => {
+      const next = i18n.language.startsWith('ar') ? 'en' : 'ar';
+      i18n.changeLanguage(next);
+      root.style.opacity = '1';
+    }, 150);
   };
 
   const handleLogout = async () => {
+    const root = document.getElementById('root');
+    if (root) { root.style.transition = 'opacity 130ms ease-in'; root.style.opacity = '0'; }
     await signOut();
-    navigate('/');
+    setTimeout(() => navigate('/'), 130);
   };
 
   const linkClass = ({ isActive }) =>
@@ -34,9 +41,7 @@ export default function Navbar() {
     <header className="bg-white border-b border-gray-200 sticky top-0 z-30">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
         <Link to="/" className="flex items-center gap-2 shrink-0">
-          <div className="w-9 h-9 rounded-lg bg-kau-600 text-white grid place-items-center font-bold">
-            K
-          </div>
+          <img src="/kau_logo.png" alt="KAU Logo" className="h-10 w-auto" />
           <span className="font-semibold text-gray-900 hidden sm:inline">{t('app.name')}</span>
         </Link>
 
