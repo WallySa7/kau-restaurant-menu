@@ -11,7 +11,7 @@ export default function ScanPage() {
   const toast = useToast();
   const scannerRef = useRef(null);
   const lockRef = useRef(false);
-  const [result, setResult] = useState(null); // { type: 'success'|'already'|'invalid'|'error', booking?, message? }
+  const [result, setResult] = useState(null);
   const [scanning, setScanning] = useState(false);
 
   const stopScanner = async () => {
@@ -57,7 +57,7 @@ export default function ScanPage() {
     const { data: booking, error } = await supabase
       .from('bookings')
       .select(
-        'id, status, ticket_code, booking_date, profiles(full_name), menu_items(title_en, title_ar, meal_type)',
+        'id, status, ticket_code, created_at, profiles(full_name), ticket_types(ticket_tier, meal_type, title_en, title_ar, includes_en, includes_ar)',
       )
       .eq('ticket_code', trimmed)
       .maybeSingle();
@@ -119,11 +119,11 @@ export default function ScanPage() {
 
         <div className="mt-4">
           {!scanning ? (
-            <button onClick={startScanner} className="btn-primary w-full">
+            <button onClick={startScanner} className="btn-primary w-full cursor-pointer">
               {result ? t('admin.scan.tryAgain') : t('admin.scan.title')}
             </button>
           ) : (
-            <button onClick={stopScanner} className="btn-secondary w-full">
+            <button onClick={stopScanner} className="btn-secondary w-full cursor-pointer">
               {t('common.cancel')}
             </button>
           )}
@@ -145,14 +145,25 @@ export default function ScanPage() {
                 {result.booking.profiles?.full_name ?? '—'}
               </div>
               <div>
-                <span className="text-gray-500">Meal:</span>{' '}
+                <span className="text-gray-500">Ticket:</span>{' '}
+                <span className="font-semibold">
+                  {t(`tickets.${result.booking.ticket_types?.ticket_tier}`)}
+                </span>{' '}
+                · {t(`menu.${result.booking.ticket_types?.meal_type}`)}
+                {' — '}
                 {i18n.language === 'ar'
-                  ? result.booking.menu_items.title_ar
-                  : result.booking.menu_items.title_en}{' '}
-                · {t(`menu.${result.booking.menu_items.meal_type}`)}
+                  ? result.booking.ticket_types?.title_ar
+                  : result.booking.ticket_types?.title_en}
               </div>
               <div>
-                <span className="text-gray-500">Date:</span> {result.booking.booking_date}
+                <span className="text-gray-500">Includes:</span>{' '}
+                {i18n.language === 'ar'
+                  ? result.booking.ticket_types?.includes_ar
+                  : result.booking.ticket_types?.includes_en}
+              </div>
+              <div>
+                <span className="text-gray-500">Purchased:</span>{' '}
+                {new Date(result.booking.created_at).toLocaleDateString()}
               </div>
             </div>
           )}

@@ -6,12 +6,13 @@ import LandingPage from './pages/student/LandingPage.jsx';
 import LoginPage from './pages/student/LoginPage.jsx';
 import RegisterPage from './pages/student/RegisterPage.jsx';
 import MenuPage from './pages/student/MenuPage.jsx';
-import BookingPage from './pages/student/BookingPage.jsx';
+import TicketShopPage from './pages/student/TicketShopPage.jsx';
 import TicketsPage from './pages/student/TicketsPage.jsx';
 import TicketDetailPage from './pages/student/TicketDetailPage.jsx';
 
 import AdminDashboardPage from './pages/admin/DashboardPage.jsx';
 import AdminMenuPage from './pages/admin/MenuManagerPage.jsx';
+import AdminTicketTypesPage from './pages/admin/TicketTypesPage.jsx';
 import AdminBookingsPage from './pages/admin/BookingsPage.jsx';
 import AdminScanPage from './pages/admin/ScanPage.jsx';
 
@@ -29,10 +30,10 @@ export default function App() {
 
         {/* Authenticated */}
         <Route
-          path="menu/:itemId/book"
+          path="tickets/purchase"
           element={
             <ProtectedRoute>
-              <BookingPage />
+              <TicketShopPage />
             </ProtectedRoute>
           }
         />
@@ -67,6 +68,14 @@ export default function App() {
           element={
             <ProtectedRoute requireAdmin>
               <AdminMenuPage />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="admin/ticket-types"
+          element={
+            <ProtectedRoute requireAdmin>
+              <AdminTicketTypesPage />
             </ProtectedRoute>
           }
         />

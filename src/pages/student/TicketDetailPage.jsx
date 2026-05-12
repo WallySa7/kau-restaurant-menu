@@ -5,7 +5,6 @@ import { QRCodeSVG } from 'qrcode.react';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 import { useToast } from '../../contexts/ToastContext.jsx';
-import { formatDate } from '../../lib/dates';
 import Skeleton from '../../components/Skeleton.jsx';
 
 const STATUS_CLASS = {
@@ -29,7 +28,7 @@ export default function TicketDetailPage() {
       const { data, error } = await supabase
         .from('bookings')
         .select(
-          'id, booking_date, status, ticket_code, menu_items(title_en, title_ar, meal_type, price_sar)',
+          'id, status, ticket_code, created_at, ticket_types(ticket_tier, meal_type, title_en, title_ar, includes_en, includes_ar, price_sar)',
         )
         .eq('id', bookingId)
         .eq('user_id', user.id)
@@ -44,9 +43,7 @@ export default function TicketDetailPage() {
       }
       setLoading(false);
     })();
-    return () => {
-      cancelled = true;
-    };
+    return () => { cancelled = true; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [bookingId, user.id]);
 
@@ -91,6 +88,10 @@ export default function TicketDetailPage() {
     return <p className="max-w-3xl mx-auto px-4 py-10 text-red-600">{t('common.error')}</p>;
   }
 
+  const tt = ticket.ticket_types;
+  const title = i18n.language === 'ar' ? tt?.title_ar : tt?.title_en;
+  const includes = i18n.language === 'ar' ? tt?.includes_ar : tt?.includes_en;
+
   return (
     <section className="max-w-2xl mx-auto px-4 py-10 space-y-6">
       <Link to="/tickets" className="text-sm text-kau-700 hover:underline print:hidden">
@@ -102,11 +103,12 @@ export default function TicketDetailPage() {
           <span className={STATUS_CLASS[ticket.status]}>{t(`tickets.${ticket.status}`)}</span>
         </div>
         <h1 className="text-xl font-bold text-gray-900 mb-1">{t('tickets.qrTitle')}</h1>
-        <p className="text-sm text-gray-500 mb-6">
-          {formatDate(ticket.booking_date, i18n.language)} ·{' '}
-          {t(`menu.${ticket.menu_items.meal_type}`)} ·{' '}
-          {i18n.language === 'ar' ? ticket.menu_items.title_ar : ticket.menu_items.title_en}
-        </p>
+        <div className="text-sm text-gray-500 mb-1">
+          <span className="font-semibold">{t(`tickets.${tt?.ticket_tier}`)}</span> · {t(`menu.${tt?.meal_type}`)} · {title}
+        </div>
+        {includes && (
+          <p className="text-xs text-gray-400 mb-6 max-w-sm mx-auto">{includes}</p>
+        )}
 
         <div
           className={`inline-block bg-white p-4 rounded-2xl border-2 ${
@@ -122,14 +124,14 @@ export default function TicketDetailPage() {
         </div>
 
         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 print:hidden">
-          <button onClick={handleCopy} className="btn-secondary">
+          <button onClick={handleCopy} className="btn-secondary cursor-pointer">
             {t('tickets.copy')}
           </button>
-          <button onClick={() => window.print()} className="btn-secondary">
+          <button onClick={() => window.print()} className="btn-secondary cursor-pointer">
             {t('tickets.print')}
           </button>
           {ticket.status === 'confirmed' && (
-            <button onClick={handleCancel} className="btn-danger">
+            <button onClick={handleCancel} className="btn-danger cursor-pointer">
               {t('tickets.cancel')}
             </button>
           )}

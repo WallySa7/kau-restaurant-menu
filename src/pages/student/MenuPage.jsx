@@ -6,10 +6,8 @@ import { useAuth } from '../../contexts/AuthContext.jsx';
 import { sundayOf, dateForDay, DAYS_OF_WEEK, MEAL_TYPES } from '../../lib/dates';
 import { CardSkeleton } from '../../components/Skeleton.jsx';
 
-// ─── PDF link — update this path to your actual PDF URL ───────────────────
 const MENU_PDF_URL = '/menu-kau.pdf';
 
-// ─── Hero slideshow images ─────────────────────────────────────────────────
 const HERO_SLIDES = [
   'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=75',
   'https://images.unsplash.com/photo-1567521464027-f127ff144326?w=1200&q=75',
@@ -28,7 +26,6 @@ function formatWeekRange(weekStart, locale) {
   return `${start.toLocaleDateString(lang, opts)} – ${end.toLocaleDateString(lang, { ...opts, year: 'numeric' })}`;
 }
 
-// ─── SVG Icons ────────────────────────────────────────────────────────────
 function SunIcon({ className = 'w-5 h-5' }) {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" className={className} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75} aria-hidden="true">
@@ -70,7 +67,6 @@ function DownloadIcon({ className = 'w-5 h-5' }) {
   );
 }
 
-// ─── Meal section metadata ─────────────────────────────────────────────────
 const MEAL_META = {
   breakfast: {
     icon: (cls) => <SunIcon className={cls} />,
@@ -95,7 +91,6 @@ const MEAL_META = {
   },
 };
 
-// ─── Hero photo slideshow ─────────────────────────────────────────────────
 function MenuHero({ weekRange, t }) {
   const [current, setCurrent] = useState(0);
 
@@ -132,7 +127,6 @@ function MenuHero({ weekRange, t }) {
           </h1>
         </div>
 
-        {/* Slide dots */}
         <div className="flex gap-1.5 mt-3" aria-hidden="true">
           {HERO_SLIDES.map((_, i) => (
             <button
@@ -149,11 +143,9 @@ function MenuHero({ weekRange, t }) {
   );
 }
 
-// ─── Day selector ─────────────────────────────────────────────────────────
 function DaySelector({ weekStart, activeDay, setActiveDay, isCurrentWeek, todayDow, t, lang }) {
   const scrollRef = useRef(null);
 
-  // Auto-scroll today's button into view on mount
   useEffect(() => {
     if (!isCurrentWeek) return;
     const el = scrollRef.current?.querySelector(`[data-day="${todayDow}"]`);
@@ -208,8 +200,27 @@ function DaySelector({ weekStart, activeDay, setActiveDay, isCurrentWeek, todayD
   );
 }
 
-// ─── Meal section ─────────────────────────────────────────────────────────
-function MealSection({ meal, slotItems, booking, isAuthenticated, t, lang, sectionIndex }) {
+function BuyTicketsBanner({ isAuthenticated, t }) {
+  return (
+    <div className="bg-gradient-to-r from-kau-700 to-kau-600 rounded-2xl p-6 sm:p-8 text-white shadow-lg">
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div>
+          <h2 className="text-xl font-bold mb-1">{t('menu.buyTickets')}</h2>
+          <p className="text-kau-100 text-sm">{t('menu.buyTicketsSub')}</p>
+        </div>
+        <Link
+          to={isAuthenticated ? '/tickets/purchase' : '/login'}
+          state={isAuthenticated ? {} : { from: { pathname: '/tickets/purchase' } }}
+          className="inline-flex items-center px-6 py-3 rounded-xl bg-white text-kau-700 font-bold text-sm hover:bg-kau-50 transition-colors shadow-sm shrink-0"
+        >
+          {t('menu.buyTickets')} →
+        </Link>
+      </div>
+    </div>
+  );
+}
+
+function MealSection({ meal, slotItems, t, lang, sectionIndex }) {
   const meta = MEAL_META[meal];
   if (slotItems.length === 0) return null;
 
@@ -218,19 +229,18 @@ function MealSection({ meal, slotItems, booking, isAuthenticated, t, lang, secti
       className="stagger-item"
       style={{ animationDelay: `${sectionIndex * 80}ms` }}
     >
-      {/* Meal type header */}
       <div className={`inline-flex items-center gap-2 px-4 py-2 rounded-xl border ${meta.headerBg} ${meta.headerText} ${meta.headerBorder} mb-4`}>
         <span className={`w-2 h-2 rounded-full ${meta.dot}`} aria-hidden="true" />
         {meta.icon('w-4 h-4')}
         <span className="font-bold text-sm">{t(`menu.${meal}`)}</span>
         <span className="text-xs opacity-60">·</span>
-        <span className="text-xs font-medium opacity-70">{slotItems.length} {lang === 'ar' ? 'وجبة' : slotItems.length === 1 ? 'item' : 'items'}</span>
+        <span className="text-xs font-medium opacity-70">
+          {slotItems.length} {lang === 'ar' ? 'وجبة' : slotItems.length === 1 ? 'item' : 'items'}
+        </span>
       </div>
 
       <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
         {slotItems.map((item, i) => {
-          const bookedThis = booking?.menu_item_id === item.id;
-          const slotTaken = booking && !bookedThis;
           const title = lang === 'ar' ? item.title_ar : item.title_en;
           const desc = lang === 'ar' ? item.description_ar : item.description_en;
 
@@ -240,7 +250,6 @@ function MealSection({ meal, slotItems, booking, isAuthenticated, t, lang, secti
               className="stagger-item bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group"
               style={{ animationDelay: `${(sectionIndex * 80) + (i * 60)}ms` }}
             >
-              {/* Image */}
               <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 shrink-0">
                 {item.photo_url ? (
                   <img
@@ -258,7 +267,6 @@ function MealSection({ meal, slotItems, booking, isAuthenticated, t, lang, secti
                 )}
               </div>
 
-              {/* Body */}
               <div className="flex flex-col flex-1 gap-1.5 p-4">
                 <h3 className="font-bold text-gray-900 leading-snug">{title}</h3>
                 {desc && (
@@ -266,24 +274,11 @@ function MealSection({ meal, slotItems, booking, isAuthenticated, t, lang, secti
                 )}
               </div>
 
-              {/* Footer */}
               <div className="flex items-center justify-between gap-2 px-4 pb-4 pt-2 border-t border-gray-100 mt-auto">
                 <span className="font-bold text-gray-900 tabular-nums text-sm">
                   {t('menu.price', { value: item.price_sar })}
                 </span>
-                {bookedThis ? (
-                  <span className="badge-success">{t('menu.alreadyBooked')}</span>
-                ) : slotTaken ? (
-                  <span className="badge-neutral">{t('menu.slotTaken')}</span>
-                ) : isAuthenticated ? (
-                  <Link to={`/menu/${item.id}/book`} className="btn-primary !py-1.5 !px-4 text-sm">
-                    {t('menu.book')}
-                  </Link>
-                ) : (
-                  <Link to="/login" className="btn-secondary !py-1.5 !px-4 text-sm">
-                    {t('nav.login')}
-                  </Link>
-                )}
+                <span className="text-xs text-gray-400">{item.capacity} available</span>
               </div>
             </article>
           );
@@ -293,15 +288,13 @@ function MealSection({ meal, slotItems, booking, isAuthenticated, t, lang, secti
   );
 }
 
-// ─── Main page ────────────────────────────────────────────────────────────
 export default function MenuPage() {
   const { t, i18n } = useTranslation();
-  const { isAuthenticated, user } = useAuth();
+  const { isAuthenticated } = useAuth();
   const lang = i18n.language;
 
   const [weekStart] = useState(() => sundayOf());
   const [items, setItems] = useState([]);
-  const [bookings, setBookings] = useState([]);
   const [loading, setLoading] = useState(true);
   const [activeDay, setActiveDay] = useState(() => new Date().getDay());
 
@@ -334,23 +327,12 @@ export default function MenuPage() {
 
       if (cancelled) return;
       setItems(menuItems ?? []);
-
-      if (user) {
-        const { data: myBookings } = await supabase
-          .from('bookings')
-          .select('menu_item_id, booking_date, meal_type, status')
-          .eq('user_id', user.id)
-          .neq('status', 'cancelled');
-        if (!cancelled) setBookings(myBookings ?? []);
-      } else {
-        setBookings([]);
-      }
       setLoading(false);
     };
 
     load();
     return () => { cancelled = true; };
-  }, [weekStart, user]);
+  }, [weekStart]);
 
   const itemsByDay = useMemo(() => {
     const grid = {};
@@ -362,25 +344,17 @@ export default function MenuPage() {
     return grid;
   }, [items]);
 
-  const slotBooking = (meal) => {
-    const date = dateForDay(weekStart, activeDay);
-    return bookings.find((b) => b.booking_date === date && b.meal_type === meal);
-  };
-
   const weekRange = formatWeekRange(weekStart, lang);
 
-  // Count meals that have items for today
   const activeDayHasAny = !loading && MEAL_TYPES.some(
     (m) => (itemsByDay[activeDay]?.[m] ?? []).length > 0
   );
 
   return (
     <div className="min-h-dvh bg-gray-50">
-      {/* Animated hero header */}
       <MenuHero weekRange={weekRange} t={t} />
 
       <div className="max-w-6xl mx-auto px-4 py-6 space-y-8">
-        {/* Day selector */}
         <DaySelector
           weekStart={weekStart}
           activeDay={activeDay}
@@ -391,7 +365,8 @@ export default function MenuPage() {
           lang={lang}
         />
 
-        {/* Content area */}
+        <BuyTicketsBanner isAuthenticated={isAuthenticated} t={t} />
+
         {loading ? (
           <div className="space-y-8">
             {MEAL_TYPES.map((m) => (
@@ -414,15 +389,12 @@ export default function MenuPage() {
             </p>
           </div>
         ) : (
-          /* All meal sections stacked */
           <div className="space-y-10">
             {MEAL_TYPES.map((meal, sectionIndex) => (
               <MealSection
                 key={`${activeDay}-${meal}`}
                 meal={meal}
                 slotItems={itemsByDay[activeDay]?.[meal] ?? []}
-                booking={slotBooking(meal)}
-                isAuthenticated={isAuthenticated}
                 t={t}
                 lang={lang}
                 sectionIndex={sectionIndex}
@@ -431,12 +403,11 @@ export default function MenuPage() {
           </div>
         )}
 
-        {/* PDF download — bottom of page */}
         <div className="border-t border-gray-200 pt-8 pb-4 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div>
             <p className="font-semibold text-gray-700">{t('menu.downloadPdf')}</p>
             <p className="text-sm text-gray-400 mt-0.5">
-              {lang === 'ar' ? 'نسخة كاملة من قائمة الأسبوع' : 'Full printable version of this week\'s menu'}
+              {lang === 'ar' ? 'نسخة كاملة من قائمة الأسبوع' : "Full printable version of this week's menu"}
             </p>
           </div>
           <a

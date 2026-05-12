@@ -19,7 +19,6 @@ export function AuthProvider({ children }) {
       .eq('id', userId)
       .single();
     if (error) {
-      // eslint-disable-next-line no-console
       console.error('[auth] failed to load profile', error);
       setProfile(null);
     } else {
@@ -81,6 +80,7 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuth() {
   const ctx = useContext(AuthContext);
   if (!ctx) throw new Error('useAuth must be used inside <AuthProvider>');

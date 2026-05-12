@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { supabase } from '../../lib/supabase';
 import { useAuth } from '../../contexts/AuthContext.jsx';
@@ -29,14 +29,14 @@ export default function MenuManagerPage() {
   const [editingId, setEditingId] = useState(null);
   const [busy, setBusy] = useState(false);
 
-  const refresh = async (currentWeekId = weekId) => {
+  const refresh = useCallback(async (currentWeekId = weekId) => {
     if (!currentWeekId) {
       setItems([]);
       return;
     }
     const { data } = await supabase.from('menu_items').select('*').eq('week_id', currentWeekId);
     setItems(data ?? []);
-  };
+  }, [weekId]);
 
   useEffect(() => {
     let cancelled = false;
@@ -53,7 +53,7 @@ export default function MenuManagerPage() {
     return () => {
       cancelled = true;
     };
-  }, [weekStart]);
+  }, [weekStart, refresh]);
 
   const ensureWeek = async () => {
     if (weekId) return weekId;
@@ -263,7 +263,6 @@ export default function MenuManagerPage() {
                   setForm((prev) => ({ ...prev, photo_url: url }));
                   toast.success(t('admin.menuManager.saved'));
                 } catch (err) {
-                  // eslint-disable-next-line no-console
                   console.error('[upload] failed', err);
                   toast.error(err.message ?? t('common.error'));
                 } finally {

@@ -56,6 +56,11 @@ export default function Navbar() {
             {t('nav.menu')}
           </NavLink>
           {isAuthenticated && (
+            <NavLink to="/tickets/purchase" className={linkClass}>
+              {t('nav.buyTickets')}
+            </NavLink>
+          )}
+          {isAuthenticated && (
             <NavLink to="/tickets" className={linkClass}>
               {t('nav.tickets')}
             </NavLink>
@@ -113,6 +118,11 @@ export default function Navbar() {
               {t('nav.menu')}
             </NavLink>
             {isAuthenticated && (
+              <NavLink to="/tickets/purchase" className={linkClass}>
+                {t('nav.buyTickets')}
+              </NavLink>
+            )}
+            {isAuthenticated && (
               <NavLink to="/tickets" className={linkClass}>
                 {t('nav.tickets')}
               </NavLink>
@@ -121,16 +131,6 @@ export default function Navbar() {
               <NavLink to="/admin" className={linkClass}>
                 {t('nav.admin')}
               </NavLink>
-            )}
-            <div className="border-t border-gray-100 my-2" />
-            {isAuthenticated ? (
-              <button onClick={handleLogout} className="btn-secondary justify-start">
-                {t('nav.logout')}
-              </button>
-            ) : (
-              <Link to="/login" className="btn-primary justify-start">
-                {t('nav.login')}
-              </Link>
             )}
           </nav>
         </div>

@@ -15,7 +15,6 @@ function IconExternal() {
 }
 
 const linkCls = 'text-kau-100/70 text-xs hover:text-white transition-colors duration-150 whitespace-nowrap focus:outline-none focus:ring-1 focus:ring-kau-400 rounded';
-const disabledCls = 'text-kau-100/30 text-xs whitespace-nowrap cursor-not-allowed select-none';
 const headingCls = 'text-kau-400 text-xs font-bold uppercase tracking-widest mb-2';
 
 export default function Footer() {
