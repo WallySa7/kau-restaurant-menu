@@ -53,6 +53,11 @@ export default function Navbar() {
 
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-1">
+          {isAuthenticated && firstName && (
+            <span className="px-3 py-2 text-sm text-kau-700 font-medium whitespace-nowrap">
+              {t('nav.welcome', { name: firstName })}
+            </span>
+          )}
           <NavLink to="/menu" className={linkClass}>
             {t('nav.menu')}
           </NavLink>
@@ -83,11 +88,6 @@ export default function Navbar() {
           </button>
 
           <div className="hidden md:flex items-center gap-2">
-            {isAuthenticated && firstName && (
-              <span className="text-sm text-gray-500 truncate max-w-[140px]">
-                {t('nav.welcome', { name: firstName })}
-              </span>
-            )}
             {isAuthenticated ? (
               <button onClick={handleLogout} className="btn-secondary !px-3 !py-1.5 text-sm">
                 {t('nav.logout')}

@@ -248,9 +248,12 @@ function MealSection({ meal, slotItems, t, lang, sectionIndex, onMealClick }) {
           return (
             <article
               key={item.id}
-              className="stagger-item bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group cursor-pointer"
+              role="button"
+              tabIndex={0}
+              className="stagger-item bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col overflow-hidden hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 group cursor-pointer focus:outline-none focus:ring-2 focus:ring-kau-400 focus:ring-offset-2"
               style={{ animationDelay: `${(sectionIndex * 80) + (i * 60)}ms` }}
               onClick={() => onMealClick(item)}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onMealClick(item); } }}
             >
               <div className="aspect-[4/3] w-full overflow-hidden bg-gray-100 shrink-0">
                 {item.photo_url ? (

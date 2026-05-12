@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { useAuth } from '../../contexts/AuthContext.jsx';
 
 const SLIDES = [
-  { src: '/hero_photo1.png', alt: 'KAU Restaurant hero 1' },
   { src: '/hero_photo2.png', alt: 'KAU Restaurant hero 2' },
   { src: '/hero_photo3.png', alt: 'KAU Restaurant hero 3' },
 ];

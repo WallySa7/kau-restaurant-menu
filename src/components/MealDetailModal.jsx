@@ -1,4 +1,5 @@
 import { useEffect, useCallback } from 'react';
+import { createPortal } from 'react-dom';
 import { useTranslation } from 'react-i18next';
 
 function CloseIcon({ className = 'w-5 h-5' }) {
@@ -27,7 +28,7 @@ function PlateIcon({ className = 'w-12 h-12' }) {
   );
 }
 
-export default function MealDetailModal({ item, lang, onClose }) {
+function ModalInner({ item, lang, onClose }) {
   const { t } = useTranslation();
 
   const handleKeyDown = useCallback((e) => {
@@ -35,16 +36,13 @@ export default function MealDetailModal({ item, lang, onClose }) {
   }, [onClose]);
 
   useEffect(() => {
-    if (!item) return;
     document.addEventListener('keydown', handleKeyDown);
     document.body.style.overflow = 'hidden';
     return () => {
       document.removeEventListener('keydown', handleKeyDown);
       document.body.style.overflow = '';
     };
-  }, [item, handleKeyDown]);
-
-  if (!item) return null;
+  }, [handleKeyDown]);
 
   const title = lang === 'ar' ? item.title_ar : item.title_en;
   const desc = lang === 'ar' ? item.description_ar : item.description_en;
@@ -58,7 +56,7 @@ export default function MealDetailModal({ item, lang, onClose }) {
       aria-label={title}
     >
       <div
-        className="absolute inset-0 bg-black/50 transition-opacity duration-200"
+        className="absolute inset-0 bg-black/50"
         onClick={onClose}
         aria-hidden="true"
       />
@@ -68,6 +66,7 @@ export default function MealDetailModal({ item, lang, onClose }) {
           onClick={onClose}
           className="absolute top-3 end-3 z-10 w-8 h-8 flex items-center justify-center rounded-full bg-white/90 hover:bg-white text-gray-600 hover:text-gray-900 shadow-sm transition-colors cursor-pointer"
           aria-label="Close"
+          type="button"
         >
           <CloseIcon className="w-4 h-4" />
         </button>
@@ -90,7 +89,7 @@ export default function MealDetailModal({ item, lang, onClose }) {
           </div>
 
           <div className="flex flex-col flex-1 p-5 sm:p-6">
-            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 leading-snug">{title}</h2>
+            <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-2 leading-snug pe-6">{title}</h2>
 
             {desc && (
               <p className="text-sm sm:text-base text-gray-500 leading-relaxed">{desc}</p>
@@ -109,5 +108,14 @@ export default function MealDetailModal({ item, lang, onClose }) {
         </div>
       </div>
     </div>
+  );
+}
+
+export default function MealDetailModal({ item, lang, onClose }) {
+  if (!item) return null;
+
+  return createPortal(
+    <ModalInner item={item} lang={lang} onClose={onClose} />,
+    document.body
   );
 }
