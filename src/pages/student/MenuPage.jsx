@@ -306,13 +306,24 @@ export default function MenuPage() {
     setLoading(true);
 
     const load = async () => {
-      const { data: weeks } = await supabase
+      let { data: weeks } = await supabase
         .from('menu_weeks')
         .select('id')
         .eq('week_start', weekStart)
         .maybeSingle();
 
       if (cancelled) return;
+
+      if (!weeks) {
+        const { data: latest } = await supabase
+          .from('menu_weeks')
+          .select('id')
+          .order('week_start', { ascending: false })
+          .limit(1)
+          .maybeSingle();
+        if (cancelled) return;
+        weeks = latest;
+      }
 
       if (!weeks) {
         setItems([]);
